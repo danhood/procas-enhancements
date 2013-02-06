@@ -51,7 +51,7 @@
     GM_addStyle('#dgTimeCard td { border: 1px solid gray; }');
     
     // style for hiding long descriptions
-    GM_addStyle('body.hideLongDescs tr[style="background-color:#e4e4e4;"] { display: none; }');
+    GM_addStyle('body.hideLongDescs .time_timecardtableDesc { display: none; }');
 
 
     ///////////////////////////////////
