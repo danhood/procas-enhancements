@@ -3,11 +3,21 @@ procas-enhancements
 
 A user script (.user.js) that provides a number of enhancements for the PROCAS timekeeping system
 
-Notes
------
+Features
+--------
+
+* Highlights federal holidays a different color
+* Allows the user to toggle on/off of the long charge code descriptions
+* Displays target hours needed based on number of weekdays in the given month
+* Displays hours needed based on hours entered and target hours
+
+
+Dependencies
+------------
 
 * You'll need [Firefox](http://www.mozilla.org/firefox/) + [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/), [Google Chrome](https://www.google.com/chrome), or some other way to run user scripts in your browser.
 * Attempts are made to make the script work in both Firefox and Google Chrome
+
 
 Installation
 ------------
