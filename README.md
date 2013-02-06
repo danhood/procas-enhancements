@@ -21,5 +21,5 @@ In Google Chrome:
 
 In Firefox:
 
-1. Simply follow open [the script](https://github.com/danhood/procas-enhancements/raw/master/procas-enhancements.user.js) in Firefox
+1. Simply open [the script](https://github.com/danhood/procas-enhancements/raw/master/procas-enhancements.user.js) in Firefox
 2. Acknowledge the Greasemonkey dialog to install the script
