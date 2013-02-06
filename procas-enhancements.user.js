@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name          PROCAS Enhancements
+// @description   A user script that provides a number of enhancements for the PROCAS timekeeping system
 // @namespace     https://github.com/danhood/
 // @match         https://www.procastime.com/time/*/modules/TimeSystem/TimeCard/mytimecard.aspx*
 // @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/mytimecard.aspx*
