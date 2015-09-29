@@ -6,7 +6,7 @@
 // @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/mytimecard.aspx*
 // @match         https://www.procastime.com/time/*/modules/TimeSystem/TimeCard/ViewReadOnly.aspx*
 // @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/ViewReadOnly.aspx*
-// @version       0.1
+// @version       0.2
 // ==/UserScript==
 
 (function() {
@@ -18,8 +18,9 @@
     
     // federal holiday schedule
     var HOLIDAYS = {
-        2013: { 1: [1,21], 2: [18], 5: [27], 7: [4], 9: [2], 10: [14], 11: [11,28], 12:[25] },
-        2014: { 1: [1,20], 2: [17], 5: [26], 7: [4], 9: [1], 10: [13], 11: [11,27], 12:[25] }
+        2015: { 1: [1,19], 2: [16], 5: [25], 7: [3], 9: [7], 10: [12], 11: [11,26], 12:[25] },
+        2016: { 1: [1,18], 2: [15], 5: [30], 7: [4], 9: [5], 10: [10], 11: [11,24], 12:[26] },
+        2017: { 1: [2,16], 2: [20], 5: [29], 7: [4], 9: [9], 10: [9], 11: [10,23], 12:[25] }
     };
 
     // highlight federal holidays
