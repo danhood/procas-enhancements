@@ -39,7 +39,7 @@
         }
 
         // add rules
-        GM_addStyle(holidays.join(', ') + ' { background-color: #fff7d7; }');
+        GM_addStyle(holidays.join(', ') + ' { background-color: #B2A9DE; }');
 
     } catch (e) { /* oh well */ }
 
