@@ -94,6 +94,21 @@
     ///////////////////////////////////
     // Hours worked, needed, remaining
     ///////////////////////////////////
+   
+    var HOURS = [
+        [152,168], // Jan
+        [160,168], // Feb 
+        [184,184], // Mar
+        [168,168], // Apr
+        [168,176], // May
+        [176,176], // Jun
+        [160,168], // Jul
+        [184,184], // Aug
+        [168,176], // Sep
+        [160,168], // Oct
+        [160,176], // Nov
+        [168,176]  // Dec
+    ];
 
     // hours info
     var totalHrs = document.querySelector('.timecard-border .time_timecardtable').querySelectorAll('td:not([class])').length * 8;
