@@ -4,9 +4,8 @@
 // @namespace     https://github.com/danhood/
 // @match         https://www.procastime.com/time/*/modules/TimeSystem/TimeCard/mytimecard.aspx*
 // @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/mytimecard.aspx*
-// @match         https://www.procastime.com/time/*/modules/TimeSystem/TimeCard/ViewReadOnly.aspx*
-// @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/ViewReadOnly.aspx*
-// @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/ViewTimeCardPMgr.aspx*
+// @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/View*.aspx*
+// @match         https://www.procastime.com/time/*/modules/TimeSystem/TimeCard/View*.aspx*
 // @version       0.2
 // ==/UserScript==
 
