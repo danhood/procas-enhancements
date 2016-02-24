@@ -63,7 +63,8 @@
     } catch (e) { /* oh well */ }
 
     // sets the dates to the specified color, optionally setting the text to a contrasting color
-    function setDatesToColors(dates, color, contrastText = true) {
+    function setDatesToColors(dates, color, contrastText) {
+        var contrastText = typeof contrastText !== 'undefined' ?  contrastText : true;
 
         // build up style rule for each day (+1 for header row)
         var targetElements = [];
