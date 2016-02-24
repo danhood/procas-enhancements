@@ -6,6 +6,7 @@ A user script (.user.js) that provides a number of enhancements for the PROCAS t
 Features
 --------
 
+* Highlights current day
 * Highlights federal holidays a different color
 * Allows the user to toggle on/off of the long charge code descriptions
 * Displays target hours needed based on number of weekdays in the given month
