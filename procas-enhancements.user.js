@@ -102,6 +102,9 @@
     // style for hiding long descriptions
     GM_addStyle('body.hideLongDescs .time_timecardtableDesc { display: none; }');
 
+    // do not bottom-align tds
+    GM_addStyle('td { vertical-align: middle; }');
+
 
     ///////////////////////////////////
     // Bottom bar
