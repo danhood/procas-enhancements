@@ -51,7 +51,7 @@
         // if displayed month and year is the current month and year
         if(ppMonth == today.getMonth() + 1 && ppYear == today.getFullYear()) {
             // behave differently if today is a holiday
-            if(holidayDates.indexOf(today.getDate()) > -1) {
+            if(typeof holidayDates !== 'undefined' && holidayDates.indexOf(today.getDate()) > -1) {
                 // set today's holiday to the desired color
                 setDatesToColors([today.getDate()], BOTH_COLOR);
             } else {
@@ -65,6 +65,11 @@
     // sets the dates to the specified color, optionally setting the text to a contrasting color
     function setDatesToColors(dates, color, contrastText) {
         var contrastText = typeof contrastText !== 'undefined' ?  contrastText : true;
+
+        // if there are no dates, do nothing
+        if (typeof dates === 'undefined') {
+            return;
+        }
 
         // build up style rule for each day (+1 for header row)
         var targetElements = [];
