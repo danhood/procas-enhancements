@@ -6,7 +6,7 @@
 // @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/mytimecard.aspx*
 // @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/View*.aspx*
 // @match         https://www.procastime.com/time/*/modules/TimeSystem/TimeCard/View*.aspx*
-// @version       0.3
+// @version       0.3.1
 // ==/UserScript==
 
 (function() {
