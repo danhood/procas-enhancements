@@ -171,9 +171,22 @@
     // hours info
     var totalHrs = document.querySelector('.timecard-border .time_timecardtable').querySelectorAll('td:not([class])').length * 8;
     var hrsWorked = parseFloat(document.querySelector('.time_timecardtableTotal').parentNode.querySelector('td:last-child').innerHTML);
+    var daysWorked = 0;
+    var workedTds = document.querySelector('.timecard-border .time_timecardtable').querySelectorAll('td:not([class])'), i;
+
+    // Cycle through the row of summary hours and count accumulated work days
+    for(i = 0; i < workedTds.length; ++i) {
+        // Debug for seeing if we're getting the proper hours summaries
+        // console.log('td' + i + ', value: ' + workedTds[i].innerText);
+        
+        // For days that have logged hours count it as a day worked
+        if (parseFloat(workedTds[i].innerText) > 0.0){
+           daysWorked++;
+        }
+    }
     var hoursDiv = document.createElement('div');
     hoursDiv.style.cssFloat = 'right';
-    hoursDiv.innerHTML = fmt(hrsWorked) + ' of ' + fmt(totalHrs) + ' hrs worked (' + fmt(totalHrs - hrsWorked) + ' hrs needed)';
+    hoursDiv.innerHTML = fmt(hrsWorked) + ' of ' + fmt(totalHrs) + ' hrs worked (' + fmt(totalHrs - hrsWorked) + ' hrs needed)' + ': Hours Differential (current): ' + currentHoursDiff(hrsWorked, daysWorked);
     fixBar.appendChild(hoursDiv);
 
 
@@ -196,6 +209,17 @@
 
         // If luminance component is > 50%, set result to black, else white
         return (Y > 127) ? 'black' : 'white';
+    }
+    
+    // determine current hours ahead or behind
+    function currentHoursDiff (hours, days) {
+        // hours worked - (days worked * 8-hr days)
+        var differential = (hours) - (days * 8);
+        
+        // Add a '+' sign for positive value, prob can use green/red text later to show ahead/behind in hours
+        if (differential > 0.0)
+            differential = "+" + differential;
+        return differential;
     }
 
 })();

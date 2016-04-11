@@ -11,6 +11,7 @@ Features
 * Allows the user to toggle on/off of the long charge code descriptions
 * Displays target hours needed based on number of weekdays in the given month
 * Displays hours needed based on hours entered and target hours
+* Displays differential in hours, above or below current month-to-date hours worked
 
 
 Dependencies
