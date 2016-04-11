@@ -7,7 +7,7 @@
 // @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/View*.aspx*
 // @match         https://www.procastime.com/time/*/modules/TimeSystem/TimeCard/View*.aspx*
 // @grant         GM_addStyle
-// @version       0.3.2
+// @version       0.3.3
 // ==/UserScript==
 
 (function() {
@@ -84,16 +84,16 @@
         // optionally make sure the displayed text is always clearly visible on the background
         if (contrastText) {
 
-          // compute if text should be black or white based on background
-          var textColor = contrastingTextColor(color);
+            // compute if text should be black or white based on background
+            var textColor = contrastingTextColor(color);
 
-          // build up style rule for each parent element's child link element
-          var targetTextElements = targetElements.map(function(elem) {
-              return elem + ' a';
-          });
+            // build up style rule for each parent element's child link element
+            var targetTextElements = targetElements.map(function(elem) {
+                return elem + ' a';
+            });
 
-          // add rules
-          GM_addStyle(targetTextElements.join(', ') + ' { color: ' + textColor + '; }');
+            // add rules
+            GM_addStyle(targetTextElements.join(', ') + ' { color: ' + textColor + '; }');
 
         }
     }
@@ -119,15 +119,15 @@
     fixBar.setAttribute('class', 'fixbar');
     GM_addStyle('body { padding-bottom: 50px !important; }');
     GM_addStyle('.fixbar { position:fixed; width:100%; bottom: 0; left: 0; right: 0; ' +
-        '-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; ' +
-        'line-height: 50px; background-color: #00385e; color: #eee; padding: 0 20px; }');
+                '-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; ' +
+                'line-height: 50px; background-color: #00385e; color: #eee; padding: 0 20px; }');
     body.appendChild(fixBar);
 
 
 
     // do not bottom-align tds
     GM_addStyle('td { vertical-align: middle !important; }');
-    
+
     ///////////////////////////////////
     // Show/Hide row
     ///////////////////////////////////
@@ -140,54 +140,55 @@
     // bind events to input - note using localStorage as GM_(set|get)Value not there in Chrome
     var hideLongDescs = document.getElementById('hideLongDescs');
     hideLongDescs.addEventListener('click', function() {
-      body.className = this.checked ? 'hideLongDescs' : ' ';
-      localStorage.setItem('hideLongDescs', this.checked);
+        body.className = this.checked ? 'hideLongDescs' : ' ';
+        localStorage.setItem('hideLongDescs', this.checked);
     });
     if(localStorage.getItem('hideLongDescs') === 'true') {
         hideLongDescs.checked = true;
         body.className = 'hideLongDescs';
     }
 
-
-    ///////////////////////////////////
-    // Hours worked, needed, remaining
-    ///////////////////////////////////
-
-    var HOURS = [
-        [152,168], // Jan
-        [160,168], // Feb
-        [184,184], // Mar
-        [168,168], // Apr
-        [168,176], // May
-        [176,176], // Jun
-        [160,168], // Jul
-        [184,184], // Aug
-        [168,176], // Sep
-        [160,168], // Oct
-        [160,176], // Nov
-        [168,176]  // Dec
-    ];
-
     // hours info
     var totalHrs = document.querySelector('.timecard-border .time_timecardtable').querySelectorAll('td:not([class])').length * 8;
     var hrsWorked = parseFloat(document.querySelector('.time_timecardtableTotal').parentNode.querySelector('td:last-child').innerHTML);
     var daysWorked = 0;
-    var workedTds = document.querySelector('.timecard-border .time_timecardtable').querySelectorAll('td:not([class])'), i;
+    var workedTds = document.querySelector('.timecard-border .time_timecardtable').querySelectorAll('td:not([class])');
 
     // Cycle through the row of summary hours and count accumulated work days
-    for(i = 0; i < workedTds.length; ++i) {
+    for(var i = 0; i < workedTds.length; ++i) {
         // Debug for seeing if we're getting the proper hours summaries
         // console.log('td' + i + ', value: ' + workedTds[i].innerText);
-        
+
         // For days that have logged hours count it as a day worked
         if (parseFloat(workedTds[i].innerText) > 0.0){
-           daysWorked++;
+            daysWorked++;
         }
     }
-    var hoursDiv = document.createElement('div');
-    hoursDiv.style.cssFloat = 'right';
-    hoursDiv.innerHTML = fmt(hrsWorked) + ' of ' + fmt(totalHrs) + ' hrs worked (' + fmt(totalHrs - hrsWorked) + ' hrs needed)' + ': Hours Differential (current): ' + currentHoursDiff(hrsWorked, daysWorked);
-    fixBar.appendChild(hoursDiv);
+    var hoursDifferential = currentHoursDiff(hrsWorked, daysWorked);
+    var hoursDifferentialDescriptor = hoursDifferential > 0.0 ? ' ahead' : ' behind';
+    var hoursDifferentialPrefixed = prefixSign(hoursDifferential) + hoursDifferentialDescriptor;    
+    var differentialValue = document.createElement('span');
+    differentialValue.innerHTML = hoursDifferentialPrefixed;
+    differentialValue.style.color = hoursDifferential > 0.0 ? 'green' : 'red';
+    differentialValue.style.backgroundColor = 'rgba(0, 0, 0, 0.42)';
+    differentialValue.style.padding = '4px';
+    
+    var differentialSpan = document.createElement('span');
+    differentialSpan.id = 'hoursDifferential';
+    differentialSpan.innerHTML = 'Hours Differential: ';
+    differentialSpan.appendChild(differentialValue);
+    
+    var hoursSpan = document.createElement('span');
+    hoursSpan.id = 'hoursSpan';
+    hoursSpan.innerHTML = fmt(hrsWorked) + ' of ' + fmt(totalHrs) + ' hrs worked (' + fmt(totalHrs - hrsWorked) + ' hrs needed)';
+    
+    var infoDiv = document.createElement('div');
+    infoDiv.style.cssFloat = 'right';
+    infoDiv.appendChild(hoursSpan);
+    infoDiv.appendChild(document.createTextNode (' '));
+    infoDiv.appendChild(differentialSpan);
+    
+    fixBar.appendChild(infoDiv);
 
 
     // format to 1 decimal place, shorthand
@@ -210,16 +211,17 @@
         // If luminance component is > 50%, set result to black, else white
         return (Y > 127) ? 'black' : 'white';
     }
-    
+
     // determine current hours ahead or behind
     function currentHoursDiff (hours, days) {
         // hours worked - (days worked * 8-hr days)
-        var differential = (hours) - (days * 8);
-        
-        // Add a '+' sign for positive value, prob can use green/red text later to show ahead/behind in hours
-        if (differential > 0.0)
-            differential = "+" + differential;
-        return differential;
+        return (hours) - (days * 8);
+    }
+    
+    // Add a '+' sign for positive value, prob can use green/red text later to show ahead/behind in hours
+    function prefixSign (number) {
+        number = fmt(number);
+        return number > 0.0 ? '+' + number : '-' + number;
     }
 
 })();
