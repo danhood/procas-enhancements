@@ -7,7 +7,7 @@
 // @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/View*.aspx*
 // @match         https://www.procastime.com/time/*/modules/TimeSystem/TimeCard/View*.aspx*
 // @grant         GM_addStyle
-// @version       0.3.4
+// @version       0.3.5
 // ==/UserScript==
 
 (function() {
@@ -168,7 +168,7 @@
     var hoursDifferentialPrefixed = prefixSign(hoursDifferential) + hoursDifferentialDescriptor;    
     var differentialValue = document.createElement('span');
     differentialValue.innerHTML = hoursDifferentialPrefixed;
-    differentialValue.style.backgroundColor = hoursDifferential > 0.0 ? 'green' : 'red';
+    differentialValue.style.backgroundColor = hoursDifferential < 0.0 ? 'red' : 'green';
     differentialValue.style.color = 'black';
     differentialValue.style.padding = '4px';
     
