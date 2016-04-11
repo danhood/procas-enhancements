@@ -7,11 +7,10 @@
 // @match         https://www.procastime.com/time/*/Modules/TimeSystem/TimeCard/View*.aspx*
 // @match         https://www.procastime.com/time/*/modules/TimeSystem/TimeCard/View*.aspx*
 // @grant         GM_addStyle
-// @version       0.3.3
+// @version       0.3.4
 // ==/UserScript==
 
 (function() {
-
 
     ///////////////////////////////////
     // Holidays
@@ -123,8 +122,6 @@
                 'line-height: 50px; background-color: #00385e; color: #eee; padding: 0 20px; }');
     body.appendChild(fixBar);
 
-
-
     // do not bottom-align tds
     GM_addStyle('td { vertical-align: middle !important; }');
 
@@ -164,13 +161,15 @@
             daysWorked++;
         }
     }
+    
+    // Hours Differential Styling
     var hoursDifferential = currentHoursDiff(hrsWorked, daysWorked);
     var hoursDifferentialDescriptor = hoursDifferential > 0.0 ? ' ahead' : ' behind';
     var hoursDifferentialPrefixed = prefixSign(hoursDifferential) + hoursDifferentialDescriptor;    
     var differentialValue = document.createElement('span');
     differentialValue.innerHTML = hoursDifferentialPrefixed;
-    differentialValue.style.color = hoursDifferential > 0.0 ? 'green' : 'red';
-    differentialValue.style.backgroundColor = 'rgba(0, 0, 0, 0.42)';
+    differentialValue.style.backgroundColor = hoursDifferential > 0.0 ? 'green' : 'red';
+    differentialValue.style.color = 'black';
     differentialValue.style.padding = '4px';
     
     var differentialSpan = document.createElement('span');
